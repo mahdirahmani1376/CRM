@@ -14,10 +14,6 @@ class ClientsSeeder extends Seeder
      */
     public function run()
     {
-        [
-        'company'   =>  fake()->company(),
-        'vat'       =>  fake()->numberBetween(10000,99999),
-        'address'   =>  fake()->address(),
-        ];
+
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Client;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ClientPolicy
+class TaskPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class ClientPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $Client
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Client $Client)
+    public function view(User $user, Task $task)
     {
         //
     }
@@ -48,10 +48,10 @@ class ClientPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $Client
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Client $Client)
+    public function update(User $user, Task $task)
     {
         //
     }
@@ -60,10 +60,10 @@ class ClientPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $Client
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Client $Client)
+    public function delete(User $user, Task $task)
     {
         //
     }
@@ -72,10 +72,10 @@ class ClientPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $Client
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Client $Client)
+    public function restore(User $user, Task $task)
     {
         //
     }
@@ -84,10 +84,10 @@ class ClientPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Client  $Client
+     * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Client $Client)
+    public function forceDelete(User $user, Task $task)
     {
         //
     }

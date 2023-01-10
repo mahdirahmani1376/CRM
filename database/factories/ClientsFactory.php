@@ -17,7 +17,9 @@ class ClientsFactory extends Factory
     public function definition()
     {
         return [
-            //
+                'company'   =>  fake()->company(),
+                'vat'       =>  fake()->numberBetween(10000,99999),
+                'address'   =>  fake()->address(),
         ];
     }
 }
