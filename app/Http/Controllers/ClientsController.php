@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-use App\Http\Requests\StoreClientRequest;
-use App\Http\Requests\UpdateClientRequest;
+use App\Data\Client\ClientCreateData;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Response;
 
 class ClientController extends Controller
 {
@@ -13,9 +14,9 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return Response::json(Client::all());
     }
 
     /**
@@ -31,12 +32,12 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreClientRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param ClientCreateData $clientCreateData
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreClientRequest $request)
+    public function store(ClientCreateData $clientCreateData): JsonResponse
     {
-        //
+        return Response::json(Client::create($clientCreateData));
     }
 
     /**
@@ -45,9 +46,9 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $Client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $Client)
+    public function show(Client $Client): JsonResponse
     {
-        //
+        return Response::json(Client::findOrFail($Client));
     }
 
     /**
@@ -68,7 +69,7 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $Client
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClientRequest $request, Client $Client)
+    public function update(Client $Client)
     {
         //
     }
