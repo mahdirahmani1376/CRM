@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Projects;
 use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
+use App\Models\Project;
 
 class ProjectsController extends Controller
 {
@@ -42,10 +42,10 @@ class ProjectsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Http\Response
      */
-    public function show(Projects $projects)
+    public function show(Project $projects)
     {
         //
     }
@@ -53,10 +53,10 @@ class ProjectsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Http\Response
      */
-    public function edit(Projects $projects)
+    public function edit(Project $projects)
     {
         //
     }
@@ -65,10 +65,10 @@ class ProjectsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateProjectsRequest  $request
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProjectsRequest $request, Projects $projects)
+    public function update(UpdateProjectsRequest $request, Project $projects)
     {
         //
     }
@@ -76,10 +76,10 @@ class ProjectsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Projects $projects)
+    public function destroy(Project $projects)
     {
         //
     }

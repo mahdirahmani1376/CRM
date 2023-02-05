@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $address
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Database\Factories\ClientFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Client newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Client newQuery()
@@ -24,9 +25,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Client whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Client whereVat($value)
+ *
  * @mixin \Eloquent
  */
 class Client extends Model
 {
+    protected $guarded = [];
+
     use HasFactory;
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

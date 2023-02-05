@@ -15,14 +15,10 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-
             $table->string('title');
             $table->string('description');
-
-            $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('client_id')->constrained()->onDelete('cascade');
             $table->string('status');
-
             $table->timestamp('deadline');
             $table->timestamps();
         });

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
 use App\Data\Client\ClientCreateData;
+use App\Models\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 
@@ -32,7 +32,7 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ClientCreateData $clientCreateData
+     * @param  ClientCreateData  $clientCreateData
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(ClientCreateData $clientCreateData): JsonResponse

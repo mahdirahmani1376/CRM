@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Client;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Client>
  */
-class TaskFactory extends Factory
+class ClientFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +17,9 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'project_id' => User::inRandomOrder()->first(),
-            'user_id' => Client::inRandomOrder()->first(),
+            'company' => fake()->company(),
+            'vat' => fake()->numberBetween(10000, 99999),
+            'address' => fake()->address(),
         ];
     }
 }
