@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('company');
             $table->unsignedBigInteger('vat');
+            $table->softDeletes();
             $table->longText('address');
             $table->timestamps();
         });

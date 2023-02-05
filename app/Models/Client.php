@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Client
@@ -32,10 +33,15 @@ class Client extends Model
 {
     protected $guarded = [];
 
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    public function scopeActive($query)
+    {
+        $query->has('projects');
     }
 }
