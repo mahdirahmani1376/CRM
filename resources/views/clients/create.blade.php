@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <form action="{{ route('clients.store') }}" method="POST">
         @csrf
 

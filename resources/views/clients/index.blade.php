@@ -18,6 +18,11 @@
                     {{ session('status') }}
                 </div>
             @endif
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             <table class="table table-responsive-sm table-striped">
                 <thead>
@@ -51,7 +56,7 @@
                 </tbody>
             </table>
 
-            {{ $clients->withQueryString()->links() }}
+             {{ $clients->withQueryString()->links() }}
         </div>
     </div>
 

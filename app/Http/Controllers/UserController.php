@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Client\ClientCreateData;
-use App\Models\Client;
-use Illuminate\Http\JsonResponse;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-class ClientController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): JsonResponse
+    public function index()
     {
-        return Response::json(Client::all());
+        $users = User::paginate(20);
+        return Response::view('users.index',compact('users'));
     }
 
     /**
@@ -32,32 +32,32 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ClientCreateData  $clientCreateData
-     * @return \Illuminate\Http\JsonResponse
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(ClientCreateData $clientCreateData): JsonResponse
+    public function store(Request $request)
     {
-        return Response::json(Client::create($clientCreateData));
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Client  $Client
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $Client): JsonResponse
+    public function show(User $user)
     {
-        return Response::json(Client::findOrFail($Client));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Client  $Client
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $Client)
+    public function edit(User $user)
     {
         //
     }
@@ -65,11 +65,11 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateClientRequest  $request
-     * @param  \App\Models\Client  $Client
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Client $Client)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -77,10 +77,10 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Client  $Client
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $Client)
+    public function destroy(User $user)
     {
         //
     }

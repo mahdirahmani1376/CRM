@@ -15,10 +15,15 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('company');
-            $table->unsignedBigInteger('vat');
+            $table->string('contact_name');
+            $table->string('contact_email');
+            $table->string('contact_phone_number');
+            $table->string('company_name');
+            $table->string('company_city');
+            $table->unsignedBigInteger('company_vat');
+            $table->unsignedBigInteger('company_zip');
+            $table->longText('company_address');
             $table->softDeletes();
-            $table->longText('address');
             $table->timestamps();
         });
     }

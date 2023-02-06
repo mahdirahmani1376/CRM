@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,5 +44,10 @@ class Client extends Model
     public function scopeActive($query)
     {
         $query->has('projects');
+    }
+
+    public function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d');
     }
 }
