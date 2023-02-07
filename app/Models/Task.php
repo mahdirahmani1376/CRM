@@ -20,6 +20,8 @@ class Task extends Model
 {
     use HasFactory,SoftDeletes;
 
+    public const STATUS = ['done','unfinished'];
+
     protected $guarded = [];
 
     public function user()

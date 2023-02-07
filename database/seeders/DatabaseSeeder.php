@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             ->each(function ($client) use ($users) {
                 Project::factory(random_int(1, 10))->create(['client_id' => $client->id])
                 ->each(function ($project) use ($users) {
-                    Task::create(['project_id' => $project->id, 'user_id' => $users->random()->id]);
+                    Task::factory()->create(['project_id' => $project->id, 'user_id' => $users->random()->id]);
                 });
             });
     }
