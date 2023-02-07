@@ -5,6 +5,7 @@ namespace Tests\BaseTestCase;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -14,7 +15,7 @@ class BaseTestCase extends  TestCase
     {
         parent::setUp();
 
-        $mahdi = User::create([
+        $mahdi = User::factory()->create([
             'first_name' => 'mahdi',
             'last_name' => 'rahmani',
             'email' => 'rahmanimahdi16@gmail.com',
@@ -25,5 +26,8 @@ class BaseTestCase extends  TestCase
         $admin = Role::create(['name' => 'Admin']);
         $simpleUser = Role::create(['name' => 'Simple User']);
 
+        $mahdi->assignRole($simpleUser);
+
+        $this->actingAs($mahdi);
     }
 }

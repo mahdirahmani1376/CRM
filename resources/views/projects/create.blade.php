@@ -45,7 +45,7 @@
                     <label for="user_id">Assigned user</label>
                     <select class="form-control {{ $errors->has('user_id') ? 'is-invalid' : '' }}" name="user_id" id="user_id" required>
                         @foreach($users as $id => $entry)
-                            <option value="{{ $id }}" {{ old('user_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                            <option value="{{ $id }}" {{ old('user_id') == $id ? 'selected' : '' }}>{{ $entry->first_name }}</option>
                         @endforeach
                     </select>
                     @if($errors->has('user_id'))
@@ -60,7 +60,7 @@
                     <label for="client_id">Assigned client</label>
                     <select class="form-control {{ $errors->has('client_id') ? 'is-invalid' : '' }}" name="client_id" id="client_id" required>
                         @foreach($clients as $id => $entry)
-                            <option value="{{ $id }}" {{ old('client_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                            <option value="{{ $id }}" {{ old('client_id') == $id ? 'selected' : '' }}>{{ $entry->contact_name }}</option>
                         @endforeach
                     </select>
                     @if($errors->has('client_id'))

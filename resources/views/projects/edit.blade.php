@@ -54,7 +54,7 @@
                                     name="user_id" id="user_id" required>
                                 @foreach($users as $id => $entry)
                                     <option
-                                        value="{{ $id }}" {{ (old('user_id') ? old('user_id') : $project->user->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                        value="{{ $id }}" {{ (old('user_id') ? old('user_id') : $project->user->id ?? '') == $id ? 'selected' : '' }}>{{ $entry->first_name }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('user_id'))
@@ -71,7 +71,7 @@
                                     name="client_id" id="client_id" required>
                                 @foreach($clients as $id => $entry)
                                     <option
-                                        value="{{ $id }}" {{ (old('client_id') ? old('client_id') : $project->client->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                        value="{{ $id }}" {{ (old('client_id') ? old('client_id') : $project->client->id ?? '') == $id ? 'selected' : '' }}>{{ $entry->contact_name }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('client_id'))
@@ -111,7 +111,7 @@
             <div class="card">
                 <div class="card-header">Files</div>
                 <div class="card-body">
-                    <form action="{{ route('media.upload', ['Project', $project]) }}" method="POST"
+                    <form action="{{ route('media.upload',$project) }}" method="POST"
                           enctype="multipart/form-data">
                         @csrf
 
@@ -149,7 +149,7 @@
                                     <a class="btn btn-xs btn-info" href="{{ route('media.download', $media) }}">
                                         Download
                                     </a>
-                                    <form action="{{ route('media.delete', ['Project', $project, $media]) }}"
+                                    <form action="{{ route('media.delete',$media) }}"
                                           method="POST" onsubmit="return confirm('Are your sure?');"
                                           style="display: inline-block;">
                                         @csrf

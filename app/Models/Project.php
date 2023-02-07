@@ -5,7 +5,11 @@ namespace App\Models;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * App\Models\Project
@@ -17,15 +21,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @mixin \Eloquent
  */
-class Project extends Model
+class Project extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes,InteractsWithMedia;
+
+    public const STATUS = ['open','closed'];
 
     protected $guarded = [];
 
-    public function tasks()
+    public function task(): hasOne
     {
-        return $this->hasMany(Task::class);
+        return $this->hasOne(Task::class);
+    }
+
+    public function client(): belongsTo
+    {
+        return $this->belongsTo(Client::class);
     }
 
     /**
@@ -34,8 +45,9 @@ class Project extends Model
      * @param  \DateTimeInterface  $date
      * @return string
      */
-    protected function serializeDate(DateTimeInterface $date)
+    protected function serializeDate(DateTimeInterface $date): string
     {
         return $date->format('Y-m-d');
     }
+
 }
