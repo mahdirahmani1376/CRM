@@ -11,7 +11,11 @@
 
     <div class="card">
         <div class="card-header">Users list</div>
-
+        @if(session('message'))
+            <div class="alert alert-success" role="alert">
+                <p>{{ session('message') }}</p>
+            </div>
+        @endif
         <div class="card-body">
             <div class="d-flex justify-content-end">
                 <form action="{{ route('users.index') }}" method="GET">

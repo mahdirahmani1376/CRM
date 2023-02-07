@@ -15,7 +15,8 @@ class BaseTestCase extends  TestCase
         parent::setUp();
 
         $mahdi = User::create([
-            'name' => 'mahdi rahmani',
+            'first_name' => 'mahdi',
+            'last_name' => 'rahmani',
             'email' => 'rahmanimahdi16@gmail.com',
             'password' => Hash::make('Ma13R18@'),
         ]);

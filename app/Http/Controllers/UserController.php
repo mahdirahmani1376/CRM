@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
@@ -16,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(20);
-        return Response::view('users.index',compact('users'));
+        $withDeleted = User::withTrashed()->get();
+        return Response::view('users.index',compact('users','withDeleted'));
     }
 
     /**
@@ -26,18 +29,21 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return Response::view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(UserRequest $userRequest)
     {
-        //
+        $data = $userRequest->validated();
+        $data['password'] = Hash::make($data['password']);
+        session()->flash('message','user created successfully');
+        return Response::redirectToRoute('users.index');
     }
 
     /**
@@ -59,7 +65,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return Response::view('users.edit',['user' => $user]);
     }
 
     /**
@@ -67,21 +73,24 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $userRequest, User $user)
     {
-        //
+        $data = $userRequest->validated();
+        $user->update($data);
+        return Response::redirectToRoute('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return Response::redirectToRoute('users.index');
     }
 }

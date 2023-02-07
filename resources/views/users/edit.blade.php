@@ -5,7 +5,7 @@
         <div class="card-header">Edit user</div>
 
         <div class="card-body">
-            <form action="{{ route('users.store') }}">
+            <form action="{{ route('users.update',$user) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -25,7 +25,7 @@
                     <input class="form-control {{ $errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" required>
                     @if($errors->has('last_name'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('lastt_name') }}
+                            {{ $errors->first('last_name') }}
                         </div>
                     @endif
                     <span class="help-block"> </span>

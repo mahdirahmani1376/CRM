@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $mahdi = User::create([
-            'name' => 'mahdi rahmani',
+        $mahdi = User::factory()->create([
+            'first_name' => 'mahdi',
+            'last_name' => 'rahmani',
             'email' => 'rahmanimahdi16@gmail.com',
             'password' => Hash::make('Ma13R18@'),
         ]);
@@ -36,6 +37,7 @@ class DatabaseSeeder extends Seeder
             ->each(function ($user) use ($admin, $simpleUser) {
                 $user->assignRole(array_rand([$admin, $simpleUser]));
             });
+
         $clients = Client::factory(30)->create()
             ->each(function ($client) use ($users) {
                 Project::factory(random_int(1, 10))->create(['client_id' => $client->id])

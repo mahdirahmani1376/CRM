@@ -39,11 +39,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'project', 'controller' => ProjectController::class], function () {
+Route::group(['prefix' => 'projects', 'controller' => ProjectController::class], function () {
     Route::get('/', 'index')->name('projects.index');
     Route::get('/{project}', 'show')->name('projects.show');
     Route::get('/create', 'create')->name('projects.create');
-    Route::get('/edit', 'create')->name('projects.edit');
+    Route::get('/{project}/edit', 'create')->name('projects.edit');
     Route::post('/', 'store')->name('projects.store');
     Route::put('/{project}', 'update')->name('projects.update');
     Route::delete('/{project}', 'destroy')->name('projects.destroy');
@@ -70,9 +70,8 @@ Route::group(['prefix' => 'task', 'controller' => TaskController::class], functi
 
 Route::group(['prefix' => 'user', 'controller' => UserController::class], function () {
     Route::get('/', 'index')->name('users.index');
-    Route::get('/{user}', 'show')->name('users.show');
     Route::get('/create', 'create')->name('users.create');
-    Route::get('/edit', 'create')->name('users.edit');
+    Route::get('/{user}/edit', 'edit')->name('users.edit');
     Route::post('/', 'store')->name('users.store');
     Route::put('/{user}', 'update')->name('users.update');
     Route::delete('/{user}', 'destroy')->name('users.destroy');
