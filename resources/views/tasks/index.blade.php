@@ -50,10 +50,10 @@
                 <tbody>
                 @foreach($tasks as $task)
                     <tr>
-                        <td><a href="{{ route('tasks.show', $task) }}">{{ $task->title }}</a></td>
+                        <td><a href="{{ route('tasks.show', $task) }}">{{ $task?->project?->title }}</a></td>
                         <td>{{ $task->user->first_name }}</td>
-                        <td>{{ $task->client->company_name }}</td>
-                        <td>{{ $task->deadline }}</td>
+                        <td>{{ $task?->project?->client?->contact_name }}</td>
+                        <td>{{ $task?->project?->deadline }}</td>
                         <td>{{ $task->status }}</td>
                         <td>
                             <a class="btn btn-sm btn-info" href="{{ route('tasks.edit', $task) }}">

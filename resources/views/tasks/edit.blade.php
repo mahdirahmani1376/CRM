@@ -52,9 +52,10 @@
                             <label for="user_id">Assigned user</label>
                             <select class="form-control {{ $errors->has('user_id') ? 'is-invalid' : '' }}"
                                     name="user_id" id="user_id" required>
-                                @foreach($users as $id => $entry)
-                                    <option
-                                        value="{{ $id }}" {{ (old('user_id') ? old('user_id') : $task->user->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">
+                                        {{ $user->first_name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @if($errors->has('user_id'))
@@ -69,9 +70,9 @@
                             <label for="client_id">Assigned client</label>
                             <select class="form-control {{ $errors->has('client_id') ? 'is-invalid' : '' }}"
                                     name="client_id" id="client_id" required>
-                                @foreach($clients as $id => $entry)
+                                @foreach($clients as $client)
                                     <option
-                                        value="{{ $id }}" {{ (old('client_id') ? old('client_id') : $task->client->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                        value="{{ $client?->id }}">{{ $client?->contact_name }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('client_id'))
@@ -86,9 +87,9 @@
                             <label for="project_id">Assigned project</label>
                             <select class="form-control {{ $errors->has('project_id') ? 'is-invalid' : '' }}"
                                     name="project_id" id="project_id" required>
-                                @foreach($projects as $id => $entry)
+                                @foreach($projects as $project)
                                     <option
-                                        value="{{ $id }}" {{ (old('project_id') ? old('project_id') : $task->project->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                                        value="{{ $project?->id }}">{{ $project?->title }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('project_id'))
@@ -122,61 +123,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">Files</div>
-                <div class="card-body">
-                    <form action="{{ route('media.upload', ['Task', $task]) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="form-group">
-                            <label class="required" for="file">File</label>
-                            <input class="form-control {{ $errors->has('file') ? 'is-invalid' : '' }}" type="file"
-                                   name="file" id="file">
-                            @if($errors->has('file'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('file') }}
-                                </div>
-                            @endif
-                            <span class="help-block"> </span>
-                        </div>
-
-                        <button class="btn btn-primary" type="submit">
-                            Upload
-                        </button>
-                    </form>
-
-                    <table class="table mt-4">
-                        <thead>
-                        <tr>
-                            <th scope="col">File name</th>
-                            <th scope="col">Size</th>
-                            <th scope="col"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($task->getMedia() as $media)
-                                <tr>
-                                    <th scope="row">{{ $media->file_name }}</th>
-                                    <td>{{ $media->human_readable_size }}</td>
-                                    <td>
-                                        <a class="btn btn-xs btn-info" href="{{ route('media.download', $media) }}">
-                                            Download
-                                        </a>
-                                        <form action="{{ route('media.delete', ['Project', $task, $media]) }}" method="POST" onsubmit="return confirm('Are your sure?');" style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="submit" class="btn btn-xs btn-danger" value="Delete">
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

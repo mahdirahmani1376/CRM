@@ -61,11 +61,11 @@ Route::group(['middleware' => ['auth:web','verified']],function()
         Route::delete('/clients/{client}', 'destroy')->name('clients.destroy');
     });
 
-    Route::group(['prefix' => 'task', 'controller' => TaskController::class], function () {
+    Route::group(['prefix' => 'tasks', 'controller' => TaskController::class], function () {
         Route::get('/', 'index')->name('tasks.index');
         Route::get('/create', 'create')->name('tasks.create');
         Route::get('/{task}', 'show')->name('tasks.show');
-        Route::get('/edit', 'edit')->name('tasks.edit');
+        Route::get('/{task}/edit', 'edit')->name('tasks.edit');
         Route::post('/', 'store')->name('tasks.store');
         Route::put('/{task}', 'update')->name('tasks.update');
         Route::delete('/{task}', 'destroy')->name('tasks.destroy');
