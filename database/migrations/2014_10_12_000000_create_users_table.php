@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->longText('address');
-            $table->string('phone_number');
+            $table->longText('address')->nullable();
+            $table->string('phone_number')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
