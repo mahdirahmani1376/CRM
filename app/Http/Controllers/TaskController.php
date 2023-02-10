@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
+use App\Models\Client;
+use App\Models\Project;
 use App\Models\Task;
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Response;
 
 class TaskController extends Controller
 {
@@ -15,7 +18,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::with(['project','user'])->paginate(20);
+        return Response::view('tasks.index',compact('tasks'));
     }
 
     /**
@@ -25,18 +29,24 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        $clients = Client::all();
+        $projects = Project::all();
+        return Response::view('tasks.create',compact('users','clients','projects'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTaskRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\TaskRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreTaskRequest $request)
+    public function store(TaskRequest $taskRequest)
     {
-        //
+        $data = $taskRequest->validated();
+        Task::create($data);
+
+        return Response::redirectToRoute('tasks.index');
     }
 
     /**
@@ -47,7 +57,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        return Response::view('tasks.show',$task);
     }
 
     /**
@@ -58,29 +68,36 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        $users = User::all();
+        $clients = Client::all();
+        $projects = Project::all();
+        return Response::view('tasks.edit',compact('task','users','clients','projects'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTaskRequest  $request
+     * @param  \App\Http\Requests\TaskRequest  $request
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(TaskRequest $taskRequest, Task $task)
     {
-        //
+        $data = $taskRequest->validated();
+        $task->update($data);
+
+        return Response::redirectToRoute('tasks.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return Response::redirectToRoute('tasks.index');
     }
 }

@@ -3,9 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Client;
+use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,17 +20,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name'      => 'mahdi rahmani',
-            'email'     => 'rahmanimahdi16@gmail.com',
-            'password'  => Hash::make('Ma13R18@'),
+        $mahdi = User::factory()->create([
+            'first_name' => 'mahdi',
+            'last_name' => 'rahmani',
+            'email' => 'rahmanimahdi16@gmail.com',
+            'password' => Hash::make('Ma13R18@'),
         ]);
 
-        // \App\Models\User::factory(10)->create();
+        $superAdmin = Role::create(['name' => 'Super Admin']);
+        $admin = Role::create(['name' => 'Admin']);
+        $simpleUser = Role::create(['name' => 'Simple User']);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $mahdi->assignRole($superAdmin);
+
+        $users = User::factory(10)->create()
+            ->each(function ($user) use ($admin, $simpleUser) {
+                $user->assignRole(array_rand([$admin, $simpleUser]));
+            });
+
+        $clients = Client::factory(30)->create()
+            ->each(function ($client) use ($users) {
+                Project::factory(random_int(1, 10))->create(['client_id' => $client->id])
+                ->each(function ($project) use ($users) {
+                    Task::factory()->create(['project_id' => $project->id, 'user_id' => $users->random()->id]);
+                });
+            });
     }
 }

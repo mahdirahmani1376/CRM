@@ -18,6 +18,7 @@ class ClientResource extends JsonResource
             'company' => $this->company,
             'vat' => $this->vat,
             'address' => $this->address,
+
         ];
     }
 }

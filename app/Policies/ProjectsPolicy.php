@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Projects;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class ProjectsPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Projects $projects)
+    public function view(User $user, Project $projects)
     {
         //
     }
@@ -48,10 +48,10 @@ class ProjectsPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Projects $projects)
+    public function update(User $user, Project $projects)
     {
         //
     }
@@ -60,10 +60,10 @@ class ProjectsPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Projects $projects)
+    public function delete(User $user, Project $projects)
     {
         //
     }
@@ -72,10 +72,10 @@ class ProjectsPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Projects $projects)
+    public function restore(User $user, Project $projects)
     {
         //
     }
@@ -84,10 +84,10 @@ class ProjectsPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Projects  $projects
+     * @param  \App\Models\Project  $projects
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Projects $projects)
+    public function forceDelete(User $user, Project $projects)
     {
         //
     }

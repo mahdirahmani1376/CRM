@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Client;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,8 +20,9 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' =>   User::inRandomOrder()->first(),
-            'client_id' => Client::inRandomOrder()->first,
+            'project_id' => User::inRandomOrder()->first(),
+            'user_id' => Client::inRandomOrder()->first(),
+            'status' => array_rand(Task::STATUS),
         ];
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Project;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreClientRequest extends FormRequest
+class ProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +15,7 @@ class StoreClientRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,12 @@ class StoreClientRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'string|required',
+            'description' => 'required',
+            'status' => 'string|required',
+            'deadline' => 'required',
+            'client_id' => 'required'
         ];
+
     }
 }
