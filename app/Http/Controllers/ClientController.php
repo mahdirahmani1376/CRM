@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Client\ClientCreateData;
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
-use GuzzleHttp\Promise\Create;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 
 class ClientController extends Controller
@@ -36,14 +33,15 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ClientRequest $clientRequest
+     * @param  ClientRequest  $clientRequest
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ClientRequest $clientRequest): \Illuminate\Http\RedirectResponse
     {
         $clientCreateData = $clientRequest->validated();
         $client = Client::create($clientCreateData);
-        session()->flash('success','client with name '. $client->company_name . ' created successfully!');
+        session()->flash('success', 'client with name '.$client->company_name.' created successfully!');
+
         return Response::redirectToRoute('clients.index');
     }
 
@@ -70,7 +68,8 @@ class ClientController extends Controller
         $clientData = $clientRequest->validated();
 
         $client->update($clientData);
-        session()->flash('success','client with name '. $client->company_name . ' updated successfully!');
+        session()->flash('success', 'client with name '.$client->company_name.' updated successfully!');
+
         return Response::redirectToRoute('clients.index');
     }
 

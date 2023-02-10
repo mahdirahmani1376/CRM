@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Models\Task;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -30,7 +29,7 @@ class TaskAssigned extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -43,9 +42,8 @@ class TaskAssigned extends Notification
     {
         return (new MailMessage)
                     ->line('a task has been assigned to a user click the below link to view it.')
-                    ->action('view task', route('tasks.show',$this->task))
-                    ->markdown('emails.tasks.assigned',['task' => $this->task])
-                    ;
+                    ->action('view task', route('tasks.show', $this->task))
+                    ->markdown('emails.tasks.assigned', ['task' => $this->task]);
     }
 
     /**
@@ -57,8 +55,8 @@ class TaskAssigned extends Notification
     public function toArray($notifiable)
     {
         return [
-            'project'   => $this->task->project->title,
-            'user'      => $this->task->user->first_name,
+            'project' => $this->task->project->title,
+            'user' => $this->task->user->first_name,
         ];
     }
 }

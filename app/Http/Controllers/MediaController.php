@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaController extends Controller
@@ -27,8 +25,7 @@ class MediaController extends Controller
     {
         $media = Media::findOrFail($mediaId);
         $media->delete();
+
         return redirect()->back();
     }
-
-
 }

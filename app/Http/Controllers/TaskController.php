@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
+use App\Jobs\TaskAssignedJob;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
-use App\Notifications\TaskAssigned;
 use Illuminate\Support\Facades\Response;
 
 class TaskController extends ParentController
@@ -19,8 +19,9 @@ class TaskController extends ParentController
      */
     public function index()
     {
-        $tasks = Task::with(['project','user'])->paginate(20);
-        return Response::view('tasks.index',compact('tasks'));
+        $tasks = Task::with(['project', 'user'])->paginate(20);
+
+        return Response::view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -33,7 +34,8 @@ class TaskController extends ParentController
         $users = User::all();
         $clients = Client::all();
         $projects = Project::all();
-        return Response::view('tasks.create',compact('users','clients','projects'));
+
+        return Response::view('tasks.create', compact('users', 'clients', 'projects'));
     }
 
     /**
@@ -46,7 +48,8 @@ class TaskController extends ParentController
     {
         $data = $taskRequest->validated();
         $task = Task::create($data);
-        $this->admins->map(fn($admin) => $admin->notify(new TaskAssigned($task)));
+        TaskAssignedJob::dispatch($this->admins, $task);
+
         return Response::redirectToRoute('tasks.index');
     }
 
@@ -58,7 +61,7 @@ class TaskController extends ParentController
      */
     public function show(Task $task)
     {
-        return Response::view('tasks.show',compact('task'));
+        return Response::view('tasks.show', compact('task'));
     }
 
     /**
@@ -72,7 +75,8 @@ class TaskController extends ParentController
         $users = User::all();
         $clients = Client::all();
         $projects = Project::all();
-        return Response::view('tasks.edit',compact('task','users','clients','projects'));
+
+        return Response::view('tasks.edit', compact('task', 'users', 'clients', 'projects'));
     }
 
     /**
@@ -99,6 +103,7 @@ class TaskController extends ParentController
     public function destroy(Task $task)
     {
         $task->delete();
+
         return Response::redirectToRoute('tasks.index');
     }
 }

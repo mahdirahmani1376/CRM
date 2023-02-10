@@ -2,14 +2,12 @@
 
 namespace Tests\BaseTestCase;
 
-
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class BaseTestCase extends  TestCase
+class BaseTestCase extends TestCase
 {
     public function setUp(): void
     {

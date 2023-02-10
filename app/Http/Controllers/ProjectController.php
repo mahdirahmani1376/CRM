@@ -17,8 +17,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('client','task')->paginate(20);
-        return Response::view('projects.index',compact('projects'));
+        $projects = Project::with('client', 'task')->paginate(20);
+
+        return Response::view('projects.index', compact('projects'));
     }
 
     /**
@@ -30,19 +31,21 @@ class ProjectController extends Controller
     {
         $users = User::all();
         $clients = Client::all();
-        return Response::view('projects.create',compact('users','clients'));
+
+        return Response::view('projects.create', compact('users', 'clients'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param ProjectRequest $projectRequest
+     * @param  ProjectRequest  $projectRequest
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ProjectRequest $projectRequest)
     {
         $data = $projectRequest->validated();
         $project = Project::create($data);
+
         return Response::redirectToRoute('projects.index');
     }
 
@@ -54,7 +57,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return Response::view('projects.show',$project);
+        return Response::view('projects.show', $project);
     }
 
     /**
@@ -67,14 +70,15 @@ class ProjectController extends Controller
     {
         $users = User::all();
         $clients = Client::all();
-        return Response::view('projects.edit',compact('project','users','clients'));
+
+        return Response::view('projects.edit', compact('project', 'users', 'clients'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param ProjectRequest $projectRequest
-     * @param \App\Models\Project $project
+     * @param  ProjectRequest  $projectRequest
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProjectRequest $projectRequest, Project $project)

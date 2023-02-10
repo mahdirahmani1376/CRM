@@ -13,6 +13,7 @@
         <div class="card-body">
             <form action="{{ route('profile.update') }}" method="POST">
                 @csrf
+                @method('patch')
 
                 <div class="form-group">
                     <label class="required" for="first_name">First name</label>
@@ -69,7 +70,7 @@
         <div class="card-header">Change password</div>
 
         <div class="card-body">
-            {{-- <form action="{{ route('password.reset') }}" method="POST">
+             <form action="{{ route('password.change') }}" method="POST">
                 @csrf
 
                 <div class="form-group">
@@ -108,7 +109,7 @@
                 <button class="btn btn-primary" type="submit">
                     Save
                 </button>
-            </form> --}}
+            </form>
         </div>
     </div>
 @endsection

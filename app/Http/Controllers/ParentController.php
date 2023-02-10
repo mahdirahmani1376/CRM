@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class ParentController extends Controller
 {
@@ -11,8 +10,8 @@ class ParentController extends Controller
 
     public function __construct(User $admins)
     {
-        $this->admins = User::with('roles')->whereHas('roles',function ($query){
-            $query->whereIn('name',['Admin','Super Admin']);
-        })->get();;
+        $this->admins = User::with('roles')->whereHas('roles', function ($query) {
+            $query->whereIn('name', ['Admin', 'Super Admin']);
+        })->get();
     }
 }

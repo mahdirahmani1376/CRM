@@ -25,7 +25,7 @@ class Project extends Model implements HasMedia
 {
     use HasFactory,SoftDeletes,InteractsWithMedia;
 
-    public const STATUS = ['open','closed'];
+    public const STATUS = ['open', 'closed'];
 
     protected $guarded = [];
 
@@ -49,5 +49,4 @@ class Project extends Model implements HasMedia
     {
         return $date->format('Y-m-d');
     }
-
 }

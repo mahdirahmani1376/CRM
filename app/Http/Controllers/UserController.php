@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 
@@ -19,7 +18,8 @@ class UserController extends Controller
     {
         $users = User::paginate(20);
         $withDeleted = User::withTrashed()->get();
-        return Response::view('users.index',compact('users','withDeleted'));
+
+        return Response::view('users.index', compact('users', 'withDeleted'));
     }
 
     /**
@@ -42,7 +42,8 @@ class UserController extends Controller
     {
         $data = $userRequest->validated();
         $data['password'] = Hash::make($data['password']);
-        session()->flash('message','user created successfully');
+        session()->flash('message', 'user created successfully');
+
         return Response::redirectToRoute('users.index');
     }
 
@@ -65,7 +66,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return Response::view('users.edit',['user' => $user]);
+        return Response::view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -79,6 +80,7 @@ class UserController extends Controller
     {
         $data = $userRequest->validated();
         $user->update($data);
+
         return Response::redirectToRoute('users.index');
     }
 
@@ -91,6 +93,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
         return Response::redirectToRoute('users.index');
     }
 }
