@@ -9,14 +9,14 @@
 
                 <div class="card-body d-flex justify-content-between">
                     <div>
-                        <div class="text-primary">{{ $task->client->contact_name }}</div>
-                        <p class="mb-0">{{ $task->client->contact_email }}</p>
-                        <p>{{ $task->client->contact_phone_number }}</p>
+                        <div class="text-primary">{{ $task->project->client->contact_name }}</div>
+                        <p class="mb-0">{{ $task->project->client->contact_email }}</p>
+                        <p>{{ $task->project->client->contact_phone_number }}</p>
                     </div>
                     <div>
-                        <p class="mb-0">{{ $task->client->company_name }}</p>
-                        <p class="mb-0">{{ $task->client->company_address }}</p>
-                        <p class="mb-0">{{ $task->client->company_city }}, {{ $task->client->company_zip }}</p>
+                        <p class="mb-0">{{ $task->project->client->company_name }}</p>
+                        <p class="mb-0">{{ $task->project->client->company_address }}</p>
+                        <p class="mb-0">{{ $task->project->client->company_city }}, {{ $task->project->client->company_zip }}</p>
                     </div>
                 </div>
             </div>

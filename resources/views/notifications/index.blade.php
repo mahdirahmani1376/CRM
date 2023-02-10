@@ -19,8 +19,8 @@
             <table class="table table-responsive-sm table-striped">
                 <thead>
                     <tr>
-                        <th>Type</th>
-                        <th>Title</th>
+                        <th>Project</th>
+                        <th>user</th>
                         <th>Sent at</th>
                         <th></th>
                     </tr>
@@ -28,19 +28,21 @@
                 <tbody>
                     @if ($notifications->count())
                         @foreach($notifications as $notification)
-                            <tr>
-                                <td>{{ ucfirst(str_replace('_', ' ', $notification->data['type'])) }}</td>
-                                <td>{{ $notification->data['title'] }}</td>
-                                <td>{{ $notification->created_at->diffForHumans() }}</td>
-                                <td>
-                                    <form action="{{ route('notifications.update', $notification) }}" method="POST"
-                                          style="display: inline-block;">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="submit" class="btn btn-sm btn-info" value="Mark as read">
-                                    </form>
-                                </td>
-                            </tr>
+                            @if(!$notification->read())
+                                <tr>
+                                    <td>{{ ucfirst(str_replace('_', ' ', $notification->data['project'])) }}</td>
+                                    <td>{{ $notification->data['user'] }}</td>
+                                    <td>{{ $notification->created_at->diffForHumans() }}</td>
+                                    <td>
+                                        <form action="{{ route('notifications.update', $notification) }}" method="POST"
+                                              style="display: inline-block;">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="submit" class="btn btn-sm btn-info" value="Mark as read">
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     @else
                         <tr>

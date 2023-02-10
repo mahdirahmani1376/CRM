@@ -151,7 +151,7 @@ Route::group(['middleware' => ['auth:web','verified']],function()
         Route::get('/edit', 'edit')->name('notifications.edit');
         Route::post('/', 'store')->name('notifications.store');
         Route::put('/{notification}', 'update')->name('notifications.update');
-        Route::delete('/{notification}', 'destroy')->name('notifications.destroy');
+        Route::delete('/', 'destroy')->name('notifications.destroy');
     });
 
     Route::group(['prefix' => 'profile', 'controller' => ProfileController::class], function () {

@@ -7,9 +7,10 @@ use App\Models\Client;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use App\Notifications\TaskAssigned;
 use Illuminate\Support\Facades\Response;
 
-class TaskController extends Controller
+class TaskController extends ParentController
 {
     /**
      * Display a listing of the resource.
@@ -44,8 +45,8 @@ class TaskController extends Controller
     public function store(TaskRequest $taskRequest)
     {
         $data = $taskRequest->validated();
-        Task::create($data);
-
+        $task = Task::create($data);
+        $this->admins->map(fn($admin) => $admin->notify(new TaskAssigned($task)));
         return Response::redirectToRoute('tasks.index');
     }
 
@@ -57,7 +58,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return Response::view('tasks.show',$task);
+        return Response::view('tasks.show',compact('task'));
     }
 
     /**
