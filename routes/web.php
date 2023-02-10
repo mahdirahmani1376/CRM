@@ -160,7 +160,7 @@ Route::group(['middleware' => ['auth:web','verified']],function()
         Route::get('/{profile}', 'show')->name('profile.show');
         Route::get('/edit', 'edit')->name('profile.edit');
         Route::post('/', 'store')->name('profile.store');
-        Route::put('/{profile}', 'update')->name('profile.update');
+        Route::put('/', 'update')->name('profile.update');
         Route::delete('/{profile}', 'destroy')->name('profile.destroy');
     });
 

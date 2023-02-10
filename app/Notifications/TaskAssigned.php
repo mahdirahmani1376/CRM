@@ -43,7 +43,9 @@ class TaskAssigned extends Notification
     {
         return (new MailMessage)
                     ->line('a task has been assigned to a user click the below link to view it.')
-                    ->action('view task', route('tasks.show',$this->task));
+                    ->action('view task', route('tasks.show',$this->task))
+                    ->markdown('emails.tasks.assigned',['task' => $this->task])
+                    ;
     }
 
     /**

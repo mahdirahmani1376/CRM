@@ -69,7 +69,7 @@
         <div class="card-header">Change password</div>
 
         <div class="card-body">
-            <form action="{{ route('profile.changePassword') }}" method="POST">
+            {{-- <form action="{{ route('password.reset') }}" method="POST">
                 @csrf
 
                 <div class="form-group">
@@ -108,7 +108,7 @@
                 <button class="btn btn-primary" type="submit">
                     Save
                 </button>
-            </form>
+            </form> --}}
         </div>
     </div>
 @endsection
